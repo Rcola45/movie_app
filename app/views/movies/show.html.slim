@@ -1,0 +1,17 @@
+
+p
+  strong Title:
+  = @movie.title
+p
+  strong Director:
+  = @movie.director
+p
+  strong Summary:
+  = @movie.summary
+p
+  strong Release date:
+  = @movie.release_date
+
+= link_to 'Edit', edit_movie_path(@movie)
+'|
+= link_to 'Back', movies_path

@@ -1,0 +1,27 @@
+h1 Listing movies
+
+table
+  thead
+    tr
+      th Title
+      th Director
+      th Summary
+      th Release date
+      th
+      th
+      th
+
+  tbody
+    - @movies.each do |movie|
+      tr
+        td = movie.title
+        td = movie.director
+        td = movie.summary
+        td = movie.release_date
+        td = link_to 'Show', movie
+        td = link_to 'Edit', edit_movie_path(movie)
+        td = link_to 'Destroy', movie, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Movie', new_movie_path
