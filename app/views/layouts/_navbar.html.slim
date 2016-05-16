@@ -3,3 +3,6 @@ nav.navbar.navbar-default
 		ul.nav.navbar-nav
 			li =link_to 'Movies', root_path
 			li =link_to 'New Movie', new_movie_path
+			li =link_to 'New User', new_user_registration_path
+			li =link_to 'Log In', new_user_session_path
+			li =link_to 'Log Out', destroy_user_session_path, :method=> :delete
