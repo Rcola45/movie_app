@@ -12,6 +12,7 @@ p
   strong Release date:
   = @movie.release_date
 
+= link_to 'Review', new_user_review_path(current_user) if current_user
 = link_to 'Edit', edit_movie_path(@movie)
 '|
 = link_to 'Back', movies_path

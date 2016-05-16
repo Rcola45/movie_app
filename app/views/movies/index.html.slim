@@ -10,6 +10,7 @@ table
       th
       th
       th
+      th
 
   tbody
     - @movies.each do |movie|
@@ -21,6 +22,7 @@ table
         td = link_to 'Show', movie
         td = link_to 'Edit', edit_movie_path(movie)
         td = link_to 'Destroy', movie, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Review', new_movie_review_path(movie.id) if current_user
 
 br
 
