@@ -4,12 +4,15 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.all.page(params[:page]).per(6)
+    #order("release_date").page(params[:page]).per(3)
+  
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
+    #@movie=Movie.find(:id).page(params[:page]).per(3)
   end
 
   # GET /movies/new
@@ -25,7 +28,7 @@ class MoviesController < ApplicationController
   # POST /movies.json
   def create
     @movie = Movie.new(movie_params)
-    
+
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }

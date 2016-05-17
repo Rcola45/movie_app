@@ -32,8 +32,14 @@ gem 'slim-rails'
 gem 'bootstrap-sass'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+# Better error gem for error page
 gem "better_errors"
 gem "binding_of_caller"
+
+# Kaminari for navigating main movie page
+gem 'kaminari'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
