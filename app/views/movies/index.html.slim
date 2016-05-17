@@ -4,6 +4,8 @@ h1 Movies
 - @movies.each do |m|
   .movie.col-xs-4 
     h3 = link_to m.title, m
+    =puts '.label.label-default' unless m.release_date>DateTime.now
+      |Coming Soon
     = link_to image_tag('poster_template.jpg'), m
     .description
       =m.summary 

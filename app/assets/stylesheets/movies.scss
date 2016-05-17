@@ -8,11 +8,24 @@
     padding: 2px;
     color: #808080;
   }
+  h5{
+    display: inline;
+  }
+  h1{
+    padding: 2px;
+  }
   .description{
     font-size: 18px;
   }
   img{
+    padding: 5px;
     display: block;
     margin: 0 auto;
   }
+  .summary{
+    text-align: left;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+  }
 }
+

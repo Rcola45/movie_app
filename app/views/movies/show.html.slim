@@ -1,21 +1,28 @@
+.movie
+  h1 =@movie.title
+  = image_tag('poster_template.jpg')
+  .summary
+    h5 Summary: 
+    =@movie.summary
+  = paginate @reviews
+  .reviews 
+    h2 Reviews
+    -@reviews.each do |r|
+      hr
+      .title.col-xs-3
+        =r.title.titleize
+      .rating.col-xs-2.label.label-default
+        =r.rating
+        |/5
+      .created.col-xs-12
+        =r.created_at
+      .content.col-xs-12
+        =r.content.camelcase
+      .author.col-xs-12
+        |Author:
+        =r.user_id
 
-p
-  strong Title:
-  = @movie.title
-p
-  strong Director:
-  = @movie.director
-p
-  strong Summary:
-  = @movie.summary
-p
-  strong Release date:
-  = @movie.release_date
-h4 Reviews
-=@movie.reviews.each do |r|
-	=r
-
-= link_to 'Review', new_movie_review_path(current_user) if current_user
-= link_to 'Edit', edit_movie_path(@movie)
-'|
-= link_to 'Back', movies_path
+  = link_to 'Write a Review', new_movie_review_path(current_user) 
+  = link_to 'Edit', edit_movie_path(@movie)
+  '|
+  = link_to 'Back', movies_path

@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all.page(params[:page]).per(6)
+    @movies = Movie.all.order(:release_date).page(params[:page]).per(6)
     #order("release_date").page(params[:page]).per(3)
   
   end
@@ -12,7 +12,8 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    #@movie=Movie.find(:id).page(params[:page]).per(3)
+   @reviews = @movie.reviews.all.page(params[:page]).per(3)
+   #@movie=Movie.find(:id).page(params[:page]).per(3)
   end
 
   # GET /movies/new

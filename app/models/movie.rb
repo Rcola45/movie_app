@@ -5,4 +5,6 @@ class Movie < ActiveRecord::Base
 	validates :title, presence: true
 	validates :director, presence: true
 	validates :summary, presence: true
+
+  #scope :has_reviewed, ->(id) {where("? == movies.id", id)}
 end

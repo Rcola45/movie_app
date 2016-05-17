@@ -4,12 +4,13 @@ class ReviewsController < ApplicationController
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = Review.all
+    set_review
   end
 
   # GET /reviews/1
   # GET /reviews/1.json
   def show
+    set_review    
   end
 
   # GET /reviews/new
@@ -67,11 +68,12 @@ class ReviewsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
-      @review = Review.find(params[:id])
+      @reviews = @movie.reviews.all.page(params[:page]).per(3)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
       params.require(:review).permit(:title, :content, :rating, :user)
     end
+
 end
