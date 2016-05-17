@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :reviews
   end
   root 'movies#index'
+
+  get '/movies/:movie_id/reviews', to: 'reviews#create', as: 'create_review'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
