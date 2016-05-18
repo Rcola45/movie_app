@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .reviews{
-  background-color: gray;
   text-align: left;
 
   h2{
@@ -16,10 +15,18 @@
   .created{
     font-size: 10px;
   }
+
+  .edit{
+    font-size: 15px;
+    text-decoration: bold;
+    display: inline-block;
+    color: white;
+  }
+  
   .rating{
     font-size: 25px;
     font-decoration: bold;
-    display: inline;
+    display: inline-block;
   }
   .content{
     font-size: 20px;
@@ -28,6 +35,8 @@
     text-decoration: italic;
     color: #808080;
   }
+
+
 
   
 }

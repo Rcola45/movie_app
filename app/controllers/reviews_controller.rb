@@ -1,16 +1,14 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_review, only: [:show, :index, :destroy]
+  before_action :set_username
   # GET /reviews
   # GET /reviews.json
   def index
-    set_review
   end
 
   # GET /reviews/1
   # GET /reviews/1.json
-  def show
-    set_review    
+  def show    
   end
 
   # GET /reviews/new
@@ -22,6 +20,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
+    @movie=Movie.find(params[:movie_id])
+    @review=@movie.reviews.find(params[:id])
   end
 
   # POST /reviews
@@ -44,6 +44,8 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
   def update
+    @movie=Movie.find(params[:movie_id])
+    @review=@movie.reviews.find(params[:id])
     respond_to do |format|
       if @review.update(review_params)
         format.html { redirect_to @movie, notice: 'Review was successfully updated.' }
@@ -74,6 +76,14 @@ class ReviewsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
       params.require(:review).permit(:title, :content, :rating, :user)
+    end
+
+    def set_username
+      @username=trim_email
+    end
+
+    def trim_email
+      current_user.email[/[^@]+/]
     end
 
 end

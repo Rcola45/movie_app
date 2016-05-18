@@ -7,4 +7,10 @@ class Movie < ActiveRecord::Base
 	validates :summary, presence: true
 
   #scope :has_reviewed, ->(id) {where("? == movies.id", id)}
+
+  def has_left_review?(id)
+    reviews.exists?(:user_id=>id)
+  end
+
+  
 end

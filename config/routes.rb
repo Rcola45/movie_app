@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   root 'movies#index'
 
   get '/movies/:movie_id/reviews', to: 'reviews#create', as: 'create_review'
+  get '/movies/:movie_id/reviews/:id', to: 'reviews#update', as: 'update_review'
+  #get '/movies/:movie_id/reviews', to: 'reviews#create', as: 'create_review'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

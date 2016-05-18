@@ -12,8 +12,9 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-   @reviews = @movie.reviews.all.page(params[:page]).per(3)
-   #@movie=Movie.find(:id).page(params[:page]).per(3)
+    @movie=Movie.find(params[:id])
+    @reviews = @movie.reviews.all.page(params[:page]).per(3)
+    
   end
 
   # GET /movies/new

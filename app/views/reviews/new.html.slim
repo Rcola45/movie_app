@@ -1,5 +1,6 @@
-h1 New review
+h1 
+  |New review
 
-== render 'form'
+= render 'form'
 
-= link_to 'Back', movie_path(:id)
+= link_to 'Back', movie_path(params[:movie_id])
