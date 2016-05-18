@@ -67,6 +67,8 @@ class ReviewsController < ApplicationController
     end
   end
 
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
@@ -78,12 +80,6 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:title, :content, :rating, :user)
     end
 
-    def set_username
-      @username=trim_email
-    end
 
-    def trim_email
-      current_user.email[/[^@]+/]
-    end
 
 end

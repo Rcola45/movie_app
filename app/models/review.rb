@@ -8,4 +8,8 @@ class Review < ActiveRecord::Base
   def is_users_review?(id)
     user_id==id
   end
+
+  def get_username(id)
+    User.find(id).email[/[^@]+/]
+  end
 end

@@ -22,8 +22,8 @@
       .content.col-xs-12
         =r.content.camelcase
       .author.col-xs-12
-        |Author:
-        =@username
+        |Author: 
+        =r.get_username(r.user_id)
         hr
 
     .col-xs-12
