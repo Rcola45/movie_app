@@ -1,10 +1,17 @@
+require "net/https"
+require "uri"
+
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all.order(:release_date).page(params[:page]).per(6)
+    @movies = Movie.all.order(:release_date).page(params[:page]).per(9)
+    @movies=  Movie.search(params[:search]).order(:release_date).page(params[:page]).per(9) if params[:search].present?
+    @movies=  Movie.newest.page(params[:page]).per(9) if params[:newest].present?
+    @movies=  Movie.name.page(params[:page]).per(9) if params[:name].present?
+    @filters=[["Oldest"=>"oldest"],["Newest"=>"newest"],["A-Z"=>"name"], "oldest"]
     #order("release_date").page(params[:page]).per(3)
   
   end
@@ -65,6 +72,10 @@ class MoviesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

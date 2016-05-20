@@ -1,8 +1,8 @@
 .movie
   h1 =@movie.title
-  = image_tag('poster_template.jpg')
+  = image_tag(get_image(@movie))
   .summary
-    h5 Summary: 
+    h4 Summary: 
     =@movie.summary
   = paginate @reviews
   .reviews 

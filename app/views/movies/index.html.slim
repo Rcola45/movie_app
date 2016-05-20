@@ -1,15 +1,25 @@
 h1 Movies
-.col-xs-12
-  =paginate @movies
-- @movies.each do |m|
-  .movie.col-xs-4 
-    h3 = link_to m.title, m
-    =puts '.label.label-default' unless m.release_date>DateTime.now
-      |Coming Soon
-    = link_to image_tag('poster_template.jpg'), m
-    .description
-      =m.summary 
-    .release_date
-      |Release Date:
-      .label.label-default
-        =m[:release_date].strftime("%B %d, %Y")
+
+.search_bar
+  =form_tag movies_path, :method => 'get', :id => "movies_search" do
+      =text_field_tag :search, params[:search]
+      =submit_tag "Search", :name => nil
+
+  .col-xs-10
+    =paginate @movies
+  .col-xs-2
+    =form_tag remote: true do
+      .field
+        = label_tag :filter_by
+        = select_tag :filter, options_for_select(@filters), :html_input =>{:onchange=>'$(this.form).submit();' }
+  - @movies.each do |m|
+    .movie.col-xs-4
+      h3.btn.btn-link
+        = link_to m.title, m
+      = link_to image_tag(get_image(m)), m 
+      .description
+        =truncate(m.summary, length:140)
+      .release_date
+        |Release Date:
+        .label.label-default
+          =m[:release_date].strftime("%B %d, %Y")

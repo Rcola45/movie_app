@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get '/movies/:movie_id/reviews', to: 'reviews#create', as: 'create_review'
   get '/movies/:movie_id/reviews/:id', to: 'reviews#update', as: 'update_review'
+  get '/movies/create_initial', to: 'movies#discover_2016_initial', as: 'create_initial'
   #get '/movies/:movie_id/reviews', to: 'reviews#create', as: 'create_review'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
