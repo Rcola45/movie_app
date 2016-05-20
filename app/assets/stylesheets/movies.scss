@@ -1,11 +1,13 @@
 // Place all the styles related to the movies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.movie-container{
+  padding: 10px;
+}
+
 .movie{ 
-  padding: 5px;
   text-align: center;
   h3 {
-    padding: 2px;
     color: #808080;
   }
   h5{
@@ -25,8 +27,7 @@
   .summary{
     font-size: 17px;
     text-align: left;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    //Make summary in a well/jumbotron
   }
 }
 

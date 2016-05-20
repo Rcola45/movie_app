@@ -1,25 +1,31 @@
-h1 Movies
+.page-header
+  h1 Movies
+  = form_tag movies_path :method => 'get', :id => "movies_search", class: "navbar-form.navbar-left", role: "Search" do
+    =text_field_tag :search, params[:search]
+    =submit_tag "Search", :name => nil
 
-.search_bar
-  =form_tag movies_path, :method => 'get', :id => "movies_search" do
-      =text_field_tag :search, params[:search]
-      =submit_tag "Search", :name => nil
 
-  .col-xs-10
+
+.paginate-wrapper
+  .paginate-custom
     =paginate @movies
-  .col-xs-2
-    =form_tag remote: true do
-      .field
-        = label_tag :filter_by
-        = select_tag :filter, options_for_select(@filters), :html_input =>{:onchange=>'$(this.form).submit();' }
-  - @movies.each do |m|
-    .movie.col-xs-4
-      h3.btn.btn-link
-        = link_to m.title, m
-      = link_to image_tag(get_image(m)), m 
-      .description
-        =truncate(m.summary, length:140)
-      .release_date
-        |Release Date:
-        .label.label-default
-          =m[:release_date].strftime("%B %d, %Y")
+/.col-xs-2
+  / FILTER FORM
+  / =form_tag remote: true do
+  /   .field
+  /     = label_tag :filter_by
+  /     = select_tag :filter, options_for_select(@filters), :html_input =>{:onchange=>'$(this.form).submit();' }
+-@movies.each_slice(3) do |movies|
+  .row
+    - movies.each do |m|
+      .movie-container.col-xs-4
+        .movie
+          h3.btn.btn-link
+            = link_to m.title, m
+          = link_to image_tag(get_image(m), size: "185x278", class: "img-responsive"), m 
+          .description
+            =truncate(m.summary, length:140)
+          .release_date
+            |Release Date:
+            .label.label-default
+              =m[:release_date].strftime("%B %d, %Y")
