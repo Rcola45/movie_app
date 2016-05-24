@@ -5,8 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require "net/https"
-require "uri"
 
 d1 = DateTime.new(2009, 3, 18)
 d2 = DateTime.new(2010, 8, 19)

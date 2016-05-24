@@ -51,6 +51,8 @@ gem 'twitter'
 # TMDB Movie Integration
 gem 'themoviedb-api'
 
+#Installing Postgres
+gem 'pg'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

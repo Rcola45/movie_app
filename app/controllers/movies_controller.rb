@@ -6,9 +6,8 @@ class MoviesController < ApplicationController
   def index
     @filters= {
       Oldest: 'release_date ASC',
-      "Newest"=>"newest",
-      "A-Z"=>"name",
-      "oldest"
+      Newest: 'release_date DESC',
+      'A-Z': 'name DESC'
     }
     @filter = @filters[params[:filter]]
     @movies = Movie.order(@filter || :release_date).search(params[:search]).page(params[:page]).per(9)
@@ -46,25 +45,20 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
-    respond_to do |format|
-      if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
-        format.json { render :show, status: :ok, location: @movie }
-      else
-        format.html { render :edit }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+    if @movie.update(movie_params)
+      redirect_to @movie, notice: 'Movie was successfully updated.'
+    else
+      render :edit
     end
+    
   end
 
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
     @movie.destroy
-    respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    
+    redirect_to movies_url, notice: 'Movie was successfully destroyed.'
   end
 
 

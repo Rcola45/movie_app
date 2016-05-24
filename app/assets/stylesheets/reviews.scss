@@ -10,7 +10,8 @@
   }
 
   .title{
-    font-size: 25px;
+    font-size: 30px;
+    text-decoration: bold;
   }
   .created{
     font-size: 10px;
@@ -24,7 +25,7 @@
   }
   
   .rating{
-    font-size: 25px;
+    font-size: 20px;
     font-decoration: bold;
     display: inline-block;
   }
@@ -34,9 +35,9 @@
   .author{
     text-decoration: italic;
     color: #808080;
-  }
+  } 
+}
 
-
-
-  
+.new-review{
+  margin-right: 0;
 }

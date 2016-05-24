@@ -11,9 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520141536) do
+ActiveRecord::Schema.define(version: 20160524164153) do
 
-  create_table "actors", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "cast", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "movie_id"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160520141536) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "actors", ["movie_id"], name: "index_actors_on_movie_id"
+  add_index "cast", ["movie_id"], name: "index_cast_on_movie_id", using: :btree
 
   create_table "genres", force: :cascade do |t|
     t.string   "name"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160520141536) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "genres", ["movie_id"], name: "index_genres_on_movie_id"
+  add_index "genres", ["movie_id"], name: "index_genres_on_movie_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -52,11 +55,6 @@ ActiveRecord::Schema.define(version: 20160520141536) do
     t.integer  "movie_id"
   end
 
-  create_table "tmdb_models", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -72,7 +70,9 @@ ActiveRecord::Schema.define(version: 20160520141536) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "cast", "movies"
+  add_foreign_key "genres", "movies"
 end
