@@ -24,10 +24,14 @@
     display: block;
     margin: 0 auto;
   }
-  .summary{
-    font-size: 17px;
+}
+
+.summary{
+    font-size: 15px;
     text-align: left;
-    //Make summary in a well/jumbotron
   }
+
+.panel-heading{
+  text-align: left;
 }
 

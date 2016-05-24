@@ -1,33 +1,10 @@
 .movie
   h1 =@movie.title
   = image_tag(get_image(@movie))
-  .summary
+  =render 'movieInfo'
+  /.summary
     h4 Summary: 
     =@movie.summary
-  = paginate @reviews
-  .reviews 
-    h2 Reviews
-    hr
-    -@reviews.each do |r|
-      .title.col-xs-3
-        =r.title.titleize
-      .rating.col-xs-2.label.label-default
-        =r.rating
-        |/5
-      .edit.col-xs-7
-        = link_to 'Edit', edit_movie_review_path(@movie,r), class: 'btn btn-primary edit' if current_user && r.is_users_review?(current_user.id)  
-      .created.col-xs-12
-        =r.created_at
-      
-      .content.col-xs-12
-        =r.content.camelcase
-      .author.col-xs-12
-        |Author: 
-        =r.get_username(r.user_id)
-        hr
-
-    .col-xs-12
-      = link_to 'Write a Review', new_movie_review_path(@movie), class: 'btn btn-default' if current_user && !@movie.has_left_review?(current_user.id)
        
       
-      = link_to 'Back', movies_path, class: 'btn btn-default'
+      /= link_to 'Back', movies_path, class: 'btn btn-default'

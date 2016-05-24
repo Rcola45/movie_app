@@ -5,22 +5,26 @@
     =submit_tag "Search", :name => nil
 
 
-
+/Implementing paginate for paged navigation of movie list
 .paginate-wrapper
-  .paginate-custom
+  .paginate-custom 
     =paginate @movies
+
+/For later implementation of filter form
 /.col-xs-2
   / FILTER FORM
   / =form_tag remote: true do
   /   .field
   /     = label_tag :filter_by
   /     = select_tag :filter, options_for_select(@filters), :html_input =>{:onchange=>'$(this.form).submit();' }
+
+/Putting movies in a 3x3 grid on each page
 -@movies.each_slice(3) do |movies|
   .row
     - movies.each do |m|
       .movie-container.col-xs-4
         .movie
-          h3.btn.btn-link
+          h2.btn.btn-link.index-title
             = link_to m.title, m
           = link_to image_tag(get_image(m), size: "185x278", class: "img-responsive"), m 
           .description

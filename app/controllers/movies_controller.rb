@@ -1,17 +1,18 @@
-require "net/https"
-require "uri"
-
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all.order(:release_date).page(params[:page]).per(9)
-    @movies=  Movie.search(params[:search]).order(:release_date).page(params[:page]).per(9) if params[:search].present?
-    @movies=  Movie.newest.page(params[:page]).per(9) if params[:newest].present?
-    @movies=  Movie.name.page(params[:page]).per(9) if params[:name].present?
-    @filters=[["Oldest"=>"oldest"],["Newest"=>"newest"],["A-Z"=>"name"], "oldest"]
+    @filters= {
+      Oldest: 'release_date ASC',
+      "Newest"=>"newest",
+      "A-Z"=>"name",
+      "oldest"
+    }
+    @filter = @filters[params[:filter]]
+    @movies = Movie.order(@filter || :release_date).search(params[:search]).page(params[:page]).per(9)
+    
     #order("release_date").page(params[:page]).per(3)
   
   end
@@ -19,9 +20,7 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @movie=Movie.find(params[:id])
-    @reviews = @movie.reviews.all.page(params[:page]).per(3)
-    
+    @reviews = @movie.reviews.page(params[:page]).per(3)
   end
 
   # GET /movies/new
@@ -36,16 +35,11 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def create
-    @movie = Movie.new(movie_params)
-
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :new }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+    @movie = Movie.new movie_params
+    if @movie.save
+      redirect_to @movie, notice: 'Movie was successfully created.'
+    else
+      render :new, alert: @movie.errors.full_messages.to_sentence
     end
   end
 

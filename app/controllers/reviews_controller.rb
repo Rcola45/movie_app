@@ -28,8 +28,8 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @movie=Movie.find(params[:movie_id])
-    @review = @movie.reviews.new(review_params)
-    @review.user_id=current_user.id
+    @review = current_user.reviews.new(review_params)
+
     respond_to do |format|
       if @review.save
         format.html { redirect_to movie_path(@movie), notice: 'Review was successfully created.' }
