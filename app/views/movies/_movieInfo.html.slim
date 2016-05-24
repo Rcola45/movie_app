@@ -1,0 +1,22 @@
+.panel-group id="accordion" role="tablist" aria-multiselectable="true"
+  .panel.panel-default
+    .panel-heading role="tab" id="summaryHeading"
+      h2.panel-title
+        a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSummary" aria-expanded="true" aria-controls="collapseSummary" Summary
+    .panel-collapse.collapse.in role="tabpanel" aria-labelledby="summaryHeading" id="collapseSummary"
+      .panel-body.summary =@movie.summary
+  .panel.panel-default
+    .panel-heading role="tab" id="detailsHeading"
+      h2.panel-title
+        a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseDetails" aria-expanded="true" aria-controls="collapseDetails" Details
+    .panel-collapse.collapse role="tabpanel" aria-labelledby="deatilsHeading" id="collapseDetails"
+      .panel-body 
+        /=@movie.actors.topFive
+        br
+        /=@movie.genres
+  .panel.panel-default
+    .panel-heading role="tab" id="reviewsHeading"
+      h2.panel-title
+        a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseReviews" aria-expanded="true" aria-controls="collapseReviews" Reviews
+    .panel-collapse.collapse role="tabpanel" aria-labelledby="reviewsHeading" id="collapseReviews"
+      .panel-body =render 'reviews'
