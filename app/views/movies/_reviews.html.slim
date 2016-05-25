@@ -1,5 +1,5 @@
 .col-xs-12.new-review
-    = link_to 'Write a Review', new_movie_review_path(@movie), class: 'btn btn-default' if current_user
+  = link_to 'Write a Review', new_movie_review_path(@movie), class: 'btn btn-default' if !current_user.reviews.exists? @movie
 = paginate @reviews
 .reviews
   h2 
@@ -7,13 +7,13 @@
       |No reviews yet! 
   -@reviews.each do |r|
     hr
-    .title.col-xs-3
+    .title.col-xs-4
       =r.title.titleize
     .rating.col-xs-1.label.label-default
       =r.rating
       |/5
-    .edit.col-xs-8
-      = link_to 'Edit', edit_review_path(r), class: 'btn btn-primary edit' if current_user 
+    .edit.col-xs-7
+      = link_to 'Edit', edit_review_path(r), class: 'btn btn-primary edit' if current_user.reviews.exists? r 
       /r.is_users_review?(current_user.id)  
     .created.col-xs-12
       =r.created_at.strftime("%Y-%m-%d")

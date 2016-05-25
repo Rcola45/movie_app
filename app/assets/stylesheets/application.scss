@@ -16,8 +16,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body{
+  background-color: transparentize(#0099cc, .7);
+}
+
 .container{
-  background-color: #C0C0C0;
+  background-color: transparentize(#0099cc, .5);
   padding-bottom: 20px;
   padding-top: 10px;
 }
@@ -37,5 +41,19 @@
 .page-header{
   h1{
     display:inline-block;
+  }
+}
+
+.navbar{
+  background-color: #00cc66;
+  
+  padding-top: 5px;
+  a{
+    font-size: 15px;
+    color: white;
+  
+  }
+  a:hover{
+    color: black;
   }
 }

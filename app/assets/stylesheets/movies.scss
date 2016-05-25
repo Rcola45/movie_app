@@ -3,10 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .movie-container{
   padding: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .movie{ 
   text-align: center;
+  a{
+    font-size: 22px;
+    color: black;
+  }
+
   h3 {
     color: #808080;
   }

@@ -9,6 +9,8 @@ html
 	body
 		.container
 			= render 'layouts/navbar'
-			p#notice= notice
-			p#alert= alert
+			-if notice.present?
+				.alert.alert-success= notice 
+			-if alert.present?
+				.alert.alert-danger= alert if present?
 			= yield

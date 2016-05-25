@@ -13,20 +13,18 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    
     @review = @movie.reviews.new
-    @review.user_id=current_user.id
   end
 
   # GET /reviews/1/edit
   def edit
-    @review=@movie.reviews.find(params[:id])
+    @review=@movie.reviews.find params[:id]
   end
 
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = current_user.reviews.new(review_params)
+    @review = current_user.reviews.new review_params
     @review.movie_id=@movie.id
     if @review.save
       redirect_to movie_path(@movie), notice: 'Review was successfully created.'
@@ -38,9 +36,9 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
   def update
-    @review=@movie.reviews.find(params[:id])
+    @review=current_user.reviews.find params[:id]
     
-    if @review.update(review_params)
+    if @review.update review_params
       redirect_to @movie, notice: 'Review was successfully updated.'
     else
       render :edit
@@ -59,8 +57,11 @@ class ReviewsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie=Movie.find(params[:movie_id])
+
+      @movie=Movie.find params[:movie_id]
+    
     end
+    
     def set_reviews
       @reviews = @movie.reviews.page(params[:page]).per(3)
     end
