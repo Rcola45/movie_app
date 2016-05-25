@@ -1,6 +1,6 @@
 .movie
   h1 =@movie.title
-  = image_tag(get_image(@movie))
+  = image_tag(@movie.image)
   =render 'movieInfo'
   /.summary
     h4 Summary: 

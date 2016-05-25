@@ -15,7 +15,7 @@ d6 = DateTime.new(2014, 3, 4)
 d7 = DateTime.new(2015, 8, 9)
 d8 = DateTime.new(2016, 7, 22)
 
-
+#Creating a few movies manually
 Movie.create(title: "Shrek", director: "Michael Bay",summary: "Shrek does something funny again",release_date: d1, poster_path: nil)
 Movie.create(title: "Shrek 2", director: "Michael Myers",summary: "Donkey gets involved this time",release_date: d2, poster_path: nil)
 Movie.create(title: "Donkey and Shrek", director: "Donkey",summary: "Wacky antics happen again",release_date: d3, poster_path: nil)
@@ -29,15 +29,20 @@ Movie.create(title: "Shrek is no Mor", director: "Nobody", summary: "Everyone di
 
 User.create(email: 'rcola45@hotmail.com', password: 'rcola45')
 
-
-url = URI.parse('http://api.themoviedb.org/3/discover/movie?primary_release_year=2016&page=2&api_key=0115aca4729dbb6e612f83f3750506fa')
-req = Net::HTTP::Get.new(url)
-m = Net::HTTP.start(url.host, url.port) {|http|
+#Creating 20 movies from the API
+key=ENV["TMDB_API"]
+discover_url = URI.parse("http://api.themoviedb.org/3/discover/movie?primary_release_year=2016&page=2&api_key=#{key}")
+req = Net::HTTP::Get.new(discover_url)
+m = Net::HTTP.start(discover_url.host, discover_url.port) {|http|
   http.request(req)
 }
 hash=JSON.parse(m.body)
 hash=hash["results"]
 
 20.times do |i|
- Movie.create(title: hash[i]["title"], director: "Placeholder_D", summary: hash[i]["overview"], release_date: hash[i]["release_date"], poster_path: hash[i]["poster_path"])
+  
+  m=Movie.create(title: hash[i]["title"], director: "Placeholder_D", summary: hash[i]["overview"], release_date: hash[i]["release_date"], poster_path: hash[i]["poster_path"], tmdb_id: hash[i]["id"])
+  Cast.generate_cast m.tmdb_id
 end
+
+

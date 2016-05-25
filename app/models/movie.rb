@@ -10,4 +10,12 @@ class Movie < ActiveRecord::Base
   #alias filter order
   scope :search, ->(search){ where('LOWER(title) LIKE ?', "%#{search.to_s.downcase}%") }
 
+
+  def image
+    if poster_path.present?
+      return "http://image.tmdb.org/t/p/w185#{poster_path}"
+    else
+      return "poster_template.jpg"
+    end
+  end
 end
